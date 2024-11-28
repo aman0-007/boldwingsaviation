@@ -1,28 +1,43 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import { fetchTeam } from '../services/api';
 
-const teamMembers = [
-  {
-    name: 'Meenakshi Ramteke',
-    designation: 'CEO of Bold Wings',
-    image: 'public\\teams\\meenakshiramakate.jpg',
-    intro: 'With 25 years of experience in the education sector, she drives the growth and success of Bold Wings, leading with a vision for excellence and positive impact.',
-  },
-  {
-    name: 'Anju Gupta',
-    designation: 'Founder and CMD of Bold Wings',
-    image: 'public\\teams\\anjugupta.jpg',
-    intro: 'With 11 years of diverse experience in media and construction, she founded Bold Wings in 2023 to contribute to skill-based education and drive its growth with creative vision and entrepreneurial expertise.',
-  },
-  {
-    name: 'Priyanka Hotkar',
-    designation: 'HOD Of Training and Placement',
-    image: 'public\\teams\\priyankahotkar.jpg',
-    intro: 'With 11 years of experience in aviation and hospitality, she brings expertise from top organizations like Shangri-La, Marriott, and Qatar Airways, focusing on empowering youth through skill development for successful careers in these industries.',
-  },
-];
+interface TeamMember {
+  _id: string;
+  name: string;
+  designation: string;
+  image: string;
+  intro: string;
+  isLocal: boolean;
+}
 
 const Team = () => {
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadTeam = async () => {
+      try {
+        const data = await fetchTeam();
+        setTeamMembers(data);
+      } catch (error) {
+        console.error('Failed to fetch team:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTeam();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f9df54]"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20">
       <motion.div
@@ -35,7 +50,7 @@ const Team = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-14">
           {teamMembers.map((member, index) => (
             <motion.div
-              key={member.name}
+              key={member._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -43,7 +58,7 @@ const Team = () => {
             >
               <div className="aspect-w-1 aspect-h-1 relative overflow-hidden">
                 <img
-                  src={member.image}
+                  src={member.isLocal ? `http://localhost:3000${member.image}` : member.image}
                   alt={member.name}
                   className="w-full h-64 object-cover object-center"
                 />

@@ -1,32 +1,45 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { fetchCourses } from '../services/api';
 
-const courses = [
-  {
-    title: 'Aviation Management',
-    subtitle: 'Comprehensive training in aviation operations',
-    image: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05',
-  },
-  {
-    title: 'Cabin Crew Training',
-    subtitle: 'Professional flight attendant certification',
-    image: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b',
-  },
-  {
-    title: 'Hospitality Management',
-    subtitle: 'Expert training in hospitality services',
-    image: 'https://images.unsplash.com/photo-1566073771259-6a8506099945',
-  },
-  {
-    title: 'Ground Staff Training',
-    subtitle: 'Complete airport operations training',
-    image: 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957',
-  },
-];
+interface Course {
+  _id: string;
+  title: string;
+  subtitle: string;
+  image: string;
+  description: string;
+  isLocal: boolean;
+}
 
 const Courses = () => {
+  const [courses, setCourses] = useState<Course[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCourses = async () => {
+      try {
+        const data = await fetchCourses();
+        setCourses(data);
+      } catch (error) {
+        console.error('Failed to fetch courses:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadCourses();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f9df54]"></div>
+      </div>
+    );
+  }
+
   return (
     <div className="pt-20">
       <motion.div
@@ -39,7 +52,7 @@ const Courses = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {courses.map((course, index) => (
             <motion.div
-              key={course.title}
+              key={course._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -47,7 +60,7 @@ const Courses = () => {
             >
               <div className="relative overflow-hidden">
                 <img
-                  src={course.image}
+                  src={course.isLocal ? `http://localhost:3000${course.image}` : course.image}
                   alt={course.title}
                   className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-105"
                 />

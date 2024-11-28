@@ -1,61 +1,40 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useAnimation } from 'framer-motion';
 import { Quote } from 'lucide-react';
+import { fetchTestimonials } from '../services/api';
 
-const testimonials = [
-  {
-    name: 'Priya Sharma',
-    role: 'Cabin Crew, Emirates',
-    image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330',
-    quote: 'BoldWings transformed my dream of becoming a cabin crew member into reality. The practical training and industry exposure were invaluable.',
-  },
-  {
-    name: 'Rahul Patel',
-    role: 'Ground Staff, Air India',
-    image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d',
-    quote: 'The comprehensive training program at BoldWings gave me the confidence to excel in my role.',
-  },
-  {
-    name: 'Sarah Khan',
-    role: 'Aviation Manager, Vistara',
-    image: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80',
-    quote: 'BoldWings provides not just education, but a complete transformation. Their focus on practical skills is exceptional.',
-  },
-  {
-    name: 'Amit Singh',
-    role: 'Flight Operations, IndiGo',
-    image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e',
-    quote: 'The hands-on experience and industry connections at BoldWings helped me secure my dream job.',
-  },
-  {
-    name: 'Neha Kapoor',
-    role: 'Hospitality Manager, Taj Hotels',
-    image: 'https://images.unsplash.com/photo-1487412720507-e7ab37603c6f',
-    quote: 'The hospitality training at BoldWings is world-class. They truly prepare you for the industry.',
-  },
-  {
-    name: 'Mohammed Ali',
-    role: 'Airport Operations, Qatar Airways',
-    image: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e',
-    quote: 'BoldWings gave me the confidence and skills to excel in international aviation operations.',
-  },
-  {
-    name: 'Anjali Desai',
-    role: 'Customer Service, Etihad Airways',
-    image: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb',
-    quote: 'The practical exposure and personality development programs at BoldWings are unmatched.',
-  },
-];
-
-// Duplicate for infinite scroll
-const duplicatedTestimonials = [...testimonials, ...testimonials];
+interface Testimonial {
+  _id: string;
+  name: string;
+  role: string;
+  image: string;
+  description: string;
+  isLocal: boolean;
+}
 
 const Testimonials = () => {
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [isHovered, setIsHovered] = useState(false);
   const controls = useAnimation();
 
-  React.useEffect(() => {
-    if (!isHovered) {
+  useEffect(() => {
+    const loadTestimonials = async () => {
+      try {
+        const data = await fetchTestimonials();
+        setTestimonials(data);
+      } catch (error) {
+        console.error('Failed to fetch testimonials:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadTestimonials();
+  }, []);
+
+  useEffect(() => {
+    if (!isHovered && testimonials.length > 0) {
       controls.start({
         x: [0, -50 + '%'],
         transition: {
@@ -70,7 +49,18 @@ const Testimonials = () => {
     } else {
       controls.stop();
     }
-  }, [isHovered, controls]);
+  }, [isHovered, controls, testimonials]);
+
+  if (isLoading) {
+    return (
+      <div className="py-20 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f9df54]"></div>
+      </div>
+    );
+  }
+
+  // Duplicate testimonials for infinite scroll
+  const duplicatedTestimonials = [...testimonials, ...testimonials];
 
   return (
     <section className="py-20 bg-gray-50 overflow-hidden">
@@ -97,7 +87,7 @@ const Testimonials = () => {
           >
             {duplicatedTestimonials.map((testimonial, index) => (
               <motion.div
-                key={`${testimonial.name}-${index}`}
+                key={`${testimonial._id}-${index}`}
                 className="flex-none w-[400px] bg-white rounded-lg p-6 shadow-lg relative"
                 whileHover={{ scale: 1.02 }}
                 transition={{ duration: 0.2 }}
@@ -105,7 +95,7 @@ const Testimonials = () => {
                 <Quote className="absolute top-4 right-4 h-8 w-8 text-[#f9df54]/30" />
                 <div className="flex items-center mb-4">
                   <img
-                    src={testimonial.image}
+                    src={testimonial.isLocal ? `http://localhost:3000${testimonial.image}` : testimonial.image}
                     alt={testimonial.name}
                     className="w-16 h-16 rounded-full object-cover mr-4"
                   />
@@ -114,7 +104,7 @@ const Testimonials = () => {
                     <p className="text-[#f9df54]">{testimonial.role}</p>
                   </div>
                 </div>
-                <p className="text-gray-600 italic">{testimonial.quote}</p>
+                <p className="text-gray-600 italic">{testimonial.description}</p>
               </motion.div>
             ))}
           </motion.div>

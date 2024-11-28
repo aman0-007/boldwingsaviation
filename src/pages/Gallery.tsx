@@ -1,41 +1,48 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Masonry from 'react-masonry-css';
+import { fetchGallery } from '../services/api';
 
-const images = [
-  {
-    src: 'https://images.unsplash.com/photo-1540962351504-03099e0a754b',
-    title: 'Aviation Training',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1606185540834-d6e7483ee1a4',
-    title: 'Hospitality Service',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902',
-    title: 'Classroom Training',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1587019158091-1a103c5dd17f',
-    title: 'Practical Sessions',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1530521954074-e64f6810b32d',
-    title: 'Student Life',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1559599076-9c61d8e1b77c',
-    title: 'Campus Events',
-  },
-];
+interface GalleryImage {
+  _id: string;
+  title: string;
+  image_url: string;
+  isLocal: boolean;
+}
 
 const Gallery = () => {
+  const [images, setImages] = useState<GalleryImage[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadGallery = async () => {
+      try {
+        const data = await fetchGallery();
+        setImages(data);
+      } catch (error) {
+        console.error('Failed to fetch gallery:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadGallery();
+  }, []);
+
   const breakpointColumns = {
     default: 3,
     1100: 3,
     700: 2,
     500: 1,
   };
+
+  if (isLoading) {
+    return (
+      <div className="pt-20 min-h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#f9df54]"></div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-20">
@@ -53,7 +60,7 @@ const Gallery = () => {
         >
           {images.map((image, index) => (
             <motion.div
-              key={image.src}
+              key={image._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
@@ -61,7 +68,7 @@ const Gallery = () => {
             >
               <div className="relative overflow-hidden rounded-lg group">
                 <img
-                  src={image.src}
+                  src={image.isLocal ? `http://localhost:3000${image.image_url}` : image.image_url}
                   alt={image.title}
                   className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
                 />
