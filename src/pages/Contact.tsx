@@ -32,8 +32,9 @@ const Contact = () => {
     <div className="min-h-screen bg-gray-50 pt-20">
       <div className="container mx-auto px-4 py-12">
         <motion.div
-          initial={{ opacity: 0, y: -20 }}
+          initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
           className="text-center mb-12"
         >
           <h1 className="text-4xl font-bold mb-4">Contact Us</h1>
@@ -42,16 +43,7 @@ const Contact = () => {
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-8 mb-16">
-          <ContactForm />
-          <ContactInfo />
-        </div>
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4 }}
-        >
+        <div className="mb-16">
           <h2 className="text-2xl font-bold mb-8 text-center">Our Locations</h2>
           <div className="grid md:grid-cols-2 gap-6">
             {locations.map((location, index) => (
@@ -62,7 +54,14 @@ const Contact = () => {
               />
             ))}
           </div>
-        </motion.div>
+        </div>
+
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-2 gap-8 bg-white rounded-2xl shadow-lg p-8">
+            <ContactForm />
+            <ContactInfo />
+          </div>
+        </div>
       </div>
     </div>
   );

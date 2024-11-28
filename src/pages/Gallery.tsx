@@ -46,12 +46,15 @@ const Gallery = () => {
 
   return (
     <div className="pt-20">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="container mx-auto px-4 py-12"
-      >
-        <h1 className="text-4xl font-bold text-center mb-12">Our Gallery</h1>
+      <div className="container mx-auto px-4 py-12">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-4xl font-bold text-center mb-12"
+        >
+          Our Gallery
+        </motion.h1>
 
         <Masonry
           breakpointCols={breakpointColumns}
@@ -63,7 +66,7 @@ const Gallery = () => {
               key={image._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               className="mb-4"
             >
               <div className="relative overflow-hidden rounded-lg group">
@@ -81,7 +84,7 @@ const Gallery = () => {
             </motion.div>
           ))}
         </Masonry>
-      </motion.div>
+      </div>
     </div>
   );
 };

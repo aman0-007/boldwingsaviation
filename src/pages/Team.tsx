@@ -40,12 +40,15 @@ const Team = () => {
 
   return (
     <div className="pt-20">
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="container mx-auto px-4 py-12"
-      >
-        <h1 className="text-4xl font-bold text-center mb-12">Our Team</h1>
+      <div className="container mx-auto px-4 py-12">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          className="text-4xl font-bold text-center mb-12"
+        >
+          Our Team
+        </motion.h1>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-14">
           {teamMembers.map((member, index) => (
@@ -53,7 +56,7 @@ const Team = () => {
               key={member._id}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.1 }}
               className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
               <div className="aspect-w-1 aspect-h-1 relative overflow-hidden">
@@ -71,7 +74,7 @@ const Team = () => {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
     </div>
   );
 };
