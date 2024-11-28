@@ -8,6 +8,8 @@ import { teamRouter } from './routes/team.js';
 import { courseRouter } from './routes/course.js';
 import { testimonialRouter } from './routes/testimonial.js';
 
+// PORT=3000
+// MONGODB_URI=mongodb://127.0.0.1:27017/BoldWings
 dotenv.config();
 
 const app = express();
