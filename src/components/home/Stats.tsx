@@ -1,6 +1,6 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import useCountUp from '../hooks/useCountUp';
+import { motion, useInView } from 'framer-motion';
+import CountUp from 'react-countup';
 
 const stats = [
   { title: 'Placement Assistance', value: 100 },
@@ -9,8 +9,11 @@ const stats = [
 ];
 
 const Stats = () => {
+  const ref = React.useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   return (
-    <section className="py-20 bg-[#f9df54]/10">
+    <section ref={ref} className="py-20 bg-[#f9df54]/10">
       <div className="container mx-auto px-3">
         <div className="grid grid-cols-3 gap-8">
           {stats.map((stat, index) => (
@@ -22,7 +25,19 @@ const Stats = () => {
               className="text-center"
             >
               <div className="text-4xl md:text-5xl font-bold text-[#f9df54] mb-2">
-                <CountUpValue value={stat.value} />
+                {isInView ? (
+                  <CountUp
+                    start={0}
+                    end={stat.value}
+                    duration={2.5}
+                    suffix="%"
+                    useEasing={true}
+                    enableScrollSpy={true}
+                    scrollSpyDelay={100}
+                  />
+                ) : (
+                  "0%"
+                )}
               </div>
               <div className="text-gray-700">{stat.title}</div>
             </motion.div>
@@ -31,11 +46,6 @@ const Stats = () => {
       </div>
     </section>
   );
-};
-
-const CountUpValue = ({ value }: { value: number }) => {
-  const count = useCountUp(value);
-  return <span>{count}%</span>;
 };
 
 export default Stats;

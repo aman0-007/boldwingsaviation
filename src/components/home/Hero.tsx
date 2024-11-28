@@ -3,19 +3,25 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
   {
-    image: "public\\logo.png",
-    title: "BoldWings",
-    subtitle: "Where Dreams Come True"
+    image: "/logo.png",
+    title: ["Bold", "Wings"],
+    subtitle: "Where Dreams Come True",
+    colors: ["text-[#FFD700]", "text-[#C0C0C0]"],
+    highlightWords: []
   },
   {
     image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
-    title: "Give Your Future",
-    subtitle: "Bold Wings in Aviation"
+    title: ["Give Your", "Future"],
+    subtitle: "Bold Wings in Aviation",
+    colors: ["text-white", "text-[#FFD700]"],
+    highlightWords: ["Bold", "Aviation"]
   },
   {
     image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
-    title: "Give Your Skills",
-    subtitle: "Bold Wings in Hospitality"
+    title: ["Give Your", "Skills"],
+    subtitle: "Bold Wings in Hospitality",
+    colors: ["text-white", "text-[#FFD700]"],
+    highlightWords: ["Bold", "Hospitality"]
   }
 ];
 
@@ -28,6 +34,19 @@ const Hero = () => {
     }, 5000);
     return () => clearInterval(timer);
   }, []);
+
+  const highlightText = (text: string, highlightWords: string[]) => {
+    if (highlightWords.length === 0) return text;
+    
+    return text.split(' ').map((word, index) => (
+      <span
+        key={index}
+        className={highlightWords.includes(word) ? 'text-[#FFD700]' : ''}
+      >
+        {word}{' '}
+      </span>
+    ));
+  };
 
   return (
     <div className="relative h-screen overflow-hidden">
@@ -54,7 +73,12 @@ const Hero = () => {
                 transition={{ duration: 0.4 }}
                 className="text-5xl md:text-7xl font-bold mb-4"
               >
-                {slides[currentSlide].title}
+                <span className={slides[currentSlide].colors[0]}>
+                  {slides[currentSlide].title[0]}{' '}
+                </span>
+                <span className={slides[currentSlide].colors[1]}>
+                  {slides[currentSlide].title[1]}
+                </span>
               </motion.h1>
               <motion.p
                 initial={{ y: 20, opacity: 0 }}
@@ -62,7 +86,7 @@ const Hero = () => {
                 transition={{ duration: 0.4, delay: 0.2 }}
                 className="text-2xl md:text-3xl"
               >
-                {slides[currentSlide].subtitle}
+                {highlightText(slides[currentSlide].subtitle, slides[currentSlide].highlightWords)}
               </motion.p>
             </div>
           </div>
