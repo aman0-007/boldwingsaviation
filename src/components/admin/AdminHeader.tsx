@@ -16,7 +16,7 @@ const AdminHeader: React.FC<AdminHeaderProps> = ({ toggleSidebar }) => {
   };
 
   return (
-    <header className="bg-white shadow-sm fixed w-full z-10">
+    <header className="fixed top-0 left-0 right-0 bg-white shadow-sm z-50">
       <div className="flex items-center justify-between h-16 px-4">
         <div className="flex items-center">
           <button

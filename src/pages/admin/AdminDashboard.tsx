@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import AdminHeader from '../../components/admin/AdminHeader';
 import AdminSidebar from '../../components/admin/AdminSidebar';
 import DashboardHome from './DashboardHome';
@@ -18,28 +18,35 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="flex h-screen bg-gray-50">
+      {/* Fixed Header */}
       <AdminHeader toggleSidebar={toggleSidebar} />
+      
+      {/* Sidebar */}
       <AdminSidebar isOpen={isSidebarOpen} />
       
-      <main 
-        className={`transition-all duration-300 ${
-          isSidebarOpen ? 'ml-64' : 'ml-0'
-        } pt-16 min-h-screen bg-gray-50`}
+      {/* Main Content */}
+      <div 
+        className={`flex-1 transition-all duration-300 ${
+          isSidebarOpen ? 'lg:ml-64' : 'lg:ml-0'
+        }`}
       >
-        <div className="p-6">
-          <Routes>
-            <Route path="/" element={<DashboardHome />} />
-            <Route path="/team" element={<TeamManagement />} />
-            <Route path="/courses" element={<CourseManagement />} />
-            <Route path="/gallery" element={<GalleryManagement />} />
-            <Route path="/messages" element={<ContactManagement />} />
-            <Route path="/testimonials" element={<TestimonialManagement />} />
-            <Route path="/queries" element={<QueryManagement />} />
-            <Route path="/settings" element={<div>Settings</div>} />
-          </Routes>
+        <div className="pt-16 min-h-screen">
+          <div className="p-6 h-full">
+            <Routes>
+              <Route path="/" element={<DashboardHome />} />
+              <Route path="/team" element={<TeamManagement />} />
+              <Route path="/courses" element={<CourseManagement />} />
+              <Route path="/gallery" element={<GalleryManagement />} />
+              <Route path="/messages" element={<ContactManagement />} />
+              <Route path="/testimonials" element={<TestimonialManagement />} />
+              <Route path="/queries" element={<QueryManagement />} />
+              <Route path="/settings" element={<div>Settings</div>} />
+              <Route path="*" element={<Navigate to="/admin" replace />} />
+            </Routes>
+          </div>
         </div>
-      </main>
+      </div>
     </div>
   );
 };

@@ -20,8 +20,8 @@ const AdminSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
 
   return (
     <aside
-      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-gray-900 text-white transition-all duration-300 ${
-        isOpen ? 'w-64' : 'w-0'
+      className={`fixed left-0 top-16 h-[calc(100vh-4rem)] bg-gray-900 text-white transition-all duration-300 z-40 ${
+        isOpen ? 'w-64' : 'w-0 lg:w-0'
       } overflow-hidden`}
     >
       <nav className="p-4">
