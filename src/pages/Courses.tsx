@@ -1,11 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
 import useCourses from '../hooks/useCourses';
+import CourseModal from '../components/courses/CourseModal';
 
 const Courses = () => {
   const { courses, isLoading } = useCourses();
+  const [selectedCourse, setSelectedCourse] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = (course) => {
+    setSelectedCourse(course);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setSelectedCourse(null);
+    setIsModalOpen(false);
+  };
 
   if (isLoading) {
     return (
@@ -47,18 +59,26 @@ const Courses = () => {
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{course.title}</h3>
                 <p className="text-gray-600 mb-4">{course.subtitle}</p>
-                <Link
-                  to="/contact"
+                <button
+                  onClick={() => openModal(course)}
                   className="inline-flex items-center text-[#f9df54] hover:text-[#f8f260] font-medium"
                 >
                   Know More
                   <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
+                </button>
               </div>
             </motion.div>
           ))}
         </div>
       </div>
+
+      {selectedCourse && (
+        <CourseModal
+          isOpen={isModalOpen}
+          onClose={closeModal}
+          course={selectedCourse}
+        />
+      )}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import CourseManagement from '../../components/admin/CourseManagement';
 import GalleryManagement from '../../components/admin/GalleryManagement';
 import ContactManagement from '../../components/admin/ContactManagement';
 import TestimonialManagement from '../../components/admin/TestimonialManagement';
+import QueryManagement from '../../components/admin/QueryManagement';
 
 const AdminDashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
@@ -34,6 +35,7 @@ const AdminDashboard = () => {
             <Route path="/gallery" element={<GalleryManagement />} />
             <Route path="/messages" element={<ContactManagement />} />
             <Route path="/testimonials" element={<TestimonialManagement />} />
+            <Route path="/queries" element={<QueryManagement />} />
             <Route path="/settings" element={<div>Settings</div>} />
           </Routes>
         </div>
@@ -42,4 +44,4 @@ const AdminDashboard = () => {
   );
 };
 
-export default AdminDashboard;  // Ensure default export
+export default AdminDashboard;

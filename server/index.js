@@ -7,9 +7,8 @@ import { galleryRouter } from './routes/gallery.js';
 import { teamRouter } from './routes/team.js';
 import { courseRouter } from './routes/course.js';
 import { testimonialRouter } from './routes/testimonial.js';
+import { queryRouter } from './routes/query.js';
 
-// PORT=3000
-// MONGODB_URI=mongodb://127.0.0.1:27017/BoldWings
 dotenv.config();
 
 const app = express();
@@ -31,6 +30,7 @@ app.use('/api', galleryRouter);
 app.use('/api', teamRouter);
 app.use('/api', courseRouter);
 app.use('/api', testimonialRouter);
+app.use('/api', queryRouter);
 
 // Error handling middleware
 app.use((err, req, res, next) => {
