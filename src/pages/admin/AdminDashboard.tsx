@@ -41,7 +41,6 @@ const AdminDashboard = () => {
               <Route path="/messages" element={<ContactManagement />} />
               <Route path="/testimonials" element={<TestimonialManagement />} />
               <Route path="/queries" element={<QueryManagement />} />
-              <Route path="/settings" element={<div>Settings</div>} />
               <Route path="*" element={<Navigate to="/admin" replace />} />
             </Routes>
           </div>

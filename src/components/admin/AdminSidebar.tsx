@@ -1,6 +1,6 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { Home, Users, BookOpen, Image, Mail, Settings, MessageSquare, HelpCircle } from 'lucide-react';
+import { Home, Users, BookOpen, Image, Mail, MessageSquare, HelpCircle } from 'lucide-react';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -15,7 +15,6 @@ const AdminSidebar: React.FC<SidebarProps> = ({ isOpen }) => {
     { icon: Mail, label: 'Messages', path: '/admin/messages' },
     { icon: MessageSquare, label: 'Testimonials', path: '/admin/testimonials' },
     { icon: HelpCircle, label: 'Queries', path: '/admin/queries' },
-    { icon: Settings, label: 'Settings', path: '/admin/settings' },
   ];
 
   return (
