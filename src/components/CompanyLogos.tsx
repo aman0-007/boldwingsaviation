@@ -2,18 +2,18 @@ import React from 'react';
 import { motion } from 'framer-motion';
 
 const companies = [
-  { name: 'Vistara', logo: 'public\\logos\\Vistara-Logo.wine.svg' },
-  { name: 'IndiGo', logo: 'public\\logos\\indigo-vector-logo-2022.svg' },
-  { name: 'Air France', logo: 'public\\logos\\Air_France_Logo.svg' },
-  { name: 'Akasha Air', logo: 'public\\logos\\akasha air.jpg' },
-  { name: 'Celebi', logo: 'public\\logos\\celebi.png' },
-  { name: 'Digiyatra', logo: 'public\\logos\\digiyatra.png' },
-  { name: 'Fern', logo: 'public\\logos\\fern.svg' },
-  { name: 'ITC', logo: 'public\\logos\\ITC_Limited_Logo.svg' },
-  { name: 'BWFS', logo: 'public\\logos\\logo.webp' },
-  { name: 'Lufthansa', logo: 'public\\logos\\Lufthansa_Logo_2018.svg' },
-  { name: 'Planet Hollywood', logo: 'public\\logos\\Planet_Hollywood_logo.svg' },
-  { name: 'Taj Hotel', logo: 'public\\logos\\Taj_Hotels_logo.svg' },
+  { name: 'Vistara', logo: 'logos\\Vistara-Logo.wine.svg' },
+  { name: 'IndiGo', logo: 'logos\\indigo-vector-logo-2022.svg' },
+  { name: 'Air France', logo: 'logos\\Air_France_Logo.svg' },
+  { name: 'Fern', logo: 'logos\\fern.svg' },
+  { name: 'ITC', logo: 'logos\\ITC_Limited_Logo.svg' },
+  { name: 'BWFS', logo: 'logos\\logo.webp' },
+  { name: 'Lufthansa', logo: 'logos\\Lufthansa_Logo_2018.svg' },
+  { name: 'Planet Hollywood', logo: 'logos\\Planet_Hollywood_logo.svg' },
+  { name: 'Taj Hotel', logo: 'logos\\Taj_Hotels_logo.svg' },
+  // { name: 'Akasha Air', logo: 'logos\\Akasa.svg' },
+  // { name: 'Celebi', logo: 'logos\\celebi.png' },
+  // { name: 'Digiyatra', logo: 'logos\\digiyatra.png' },
 ];
 
 const duplicatedCompanies = [...companies];
