@@ -29,7 +29,7 @@ const Intro = () => {
             className="md:w-1/2"
           >
             <img
-              src="https://images.unsplash.com/photo-1606761568499-6d2451b23c66"
+              src="\welcomeimage.png"
               alt="Bold Wings Institute"
               className="rounded-lg shadow-xl w-full h-[400px] object-cover"
             />

@@ -1,12 +1,26 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
-import useTestimonials from '../hooks/useTestimonials';
-import useInfiniteScroll from '../hooks/useInfiniteScroll';
+import useTestimonials from '../../hooks/useTestimonials';
+import useInfiniteScroll from '../../hooks/useInfiniteScroll';
+import TestimonialCard from './testimonials/TestimonialCard';
+import SectionHeader from '../shared/SectionHeader';
+
+const CARD_WIDTH = 400; // Width of each testimonial card
+const CARD_GAP = 24; // Gap between cards (space-x-6 = 1.5rem = 24px)
 
 const Testimonials = () => {
   const { testimonials, isLoading } = useTestimonials();
-  const { scrollX, isHovered } = useInfiniteScroll();
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [containerWidth, setContainerWidth] = useState(0);
+
+  useEffect(() => {
+    if (containerRef.current && testimonials.length > 0) {
+      const totalWidth = testimonials.length * (CARD_WIDTH + CARD_GAP);
+      setContainerWidth(totalWidth);
+    }
+  }, [testimonials]);
+
+  const { scrollX, isHovered } = useInfiniteScroll(containerWidth, 2);
 
   if (isLoading) {
     return (
@@ -16,54 +30,37 @@ const Testimonials = () => {
     );
   }
 
-  const duplicatedTestimonials = [...testimonials, ...testimonials];
+  // Create a seamless loop by duplicating testimonials
+  const duplicatedTestimonials = [...testimonials, ...testimonials, ...testimonials];
 
   return (
     <section className="py-20 bg-gray-50 overflow-hidden">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-          className="text-center mb-12"
-        >
-          <h2 className="text-4xl font-bold mb-4">What Our Students Say</h2>
-          <p className="text-gray-600">Hear from our successful alumni about their journey with BoldWings</p>
-        </motion.div>
+        <SectionHeader
+          title="What Our Students Say"
+          subtitle="Hear from our successful alumni about their journey with BoldWings"
+        />
 
-        <div className="relative">
+        <div className="relative mt-12">
           <div className="absolute left-0 top-0 w-20 h-full bg-gradient-to-r from-gray-50 to-transparent z-10" />
           <div className="absolute right-0 top-0 w-20 h-full bg-gradient-to-l from-gray-50 to-transparent z-10" />
           
-          <motion.div
-            style={{ x: scrollX }}
-            className="flex space-x-6"
-            onMouseEnter={() => isHovered.current = true}
-            onMouseLeave={() => isHovered.current = false}
-          >
-            {duplicatedTestimonials.map((testimonial, index) => (
-              <motion.div
-                key={`${testimonial._id}-${index}`}
-                className="flex-none w-[400px] bg-white rounded-lg p-6 shadow-lg relative"
-                whileHover={{ scale: 1.02 }}
-                transition={{ duration: 0.2 }}
-              >
-                <Quote className="absolute top-4 right-4 h-8 w-8 text-[#f9df54]/30" />
-                <div className="flex items-center mb-4">
-                  <img
-                    src={testimonial.isLocal ? `http://localhost:3000${testimonial.image}` : testimonial.image}
-                    alt={testimonial.name}
-                    className="w-16 h-16 rounded-full object-cover mr-4"
-                  />
-                  <div>
-                    <h3 className="font-semibold text-lg">{testimonial.name}</h3>
-                    <p className="text-[#f9df54]">{testimonial.role}</p>
-                  </div>
-                </div>
-                <p className="text-gray-600 italic">{testimonial.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
+          <div className="overflow-hidden">
+            <motion.div
+              ref={containerRef}
+              style={{ x: scrollX }}
+              className="flex space-x-6"
+              onMouseEnter={() => isHovered.current = true}
+              onMouseLeave={() => isHovered.current = false}
+            >
+              {duplicatedTestimonials.map((testimonial, index) => (
+                <TestimonialCard
+                  key={`${testimonial._id}-${index}`}
+                  testimonial={testimonial}
+                />
+              ))}
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>
