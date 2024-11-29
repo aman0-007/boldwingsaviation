@@ -32,7 +32,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onSubmit, isSubmitting }) => {
               },
             })}
             className="pl-10 w-full rounded-lg border bg-gray-800/50 border-gray-600 text-white placeholder-gray-400 focus:ring-2 focus:ring-[#f9df54] focus:border-transparent"
-            placeholder="admin@boldwings.com"
+            placeholder="username/email"
           />
         </div>
         {errors.email && (

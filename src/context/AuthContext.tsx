@@ -20,7 +20,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string): Promise<boolean> => {
     // In a real app, validate against your backend
-    if (email === 'admin@boldwings.com' && password === 'admin123') {
+    if (email === 'meenakshi@boldwings.com' && password === 'meenakshi@boldwings') {
+      localStorage.setItem('adminToken', 'dummy-token');
+      setIsAuthenticated(true);
+      return true;
+    } else if (email === 'anju@boldwings.com' && password === 'anju@boldwings'){
       localStorage.setItem('adminToken', 'dummy-token');
       setIsAuthenticated(true);
       return true;

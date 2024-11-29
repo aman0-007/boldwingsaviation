@@ -6,7 +6,7 @@ import { TestimonialCardProps } from '../../../types/testimonial';
 const TestimonialCard: React.FC<TestimonialCardProps> = ({ testimonial }) => {
   return (
     <motion.div
-      className="flex-none w-[400px] bg-white rounded-lg p-6 shadow-lg relative group"
+      className="flex-none w-[400px] bg-white rounded-lg p-6 shadow-lg relative group hover:shadow-xl transition-all duration-300"
       whileHover={{ scale: 1.02 }}
       transition={{ duration: 0.2 }}
     >

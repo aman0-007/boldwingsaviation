@@ -3,17 +3,17 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const slides = [
   {
-    image: "public\\logo.png",
+    image: "logo.png",
     title: "BoldWings",
     subtitle: "Where Dreams Come True"
   },
   {
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
+    image: "hero2.jpg",
     title: "Give Your Future",
     subtitle: "Bold Wings in Aviation"
   },
   {
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image: "hero3.jpg",
     title: "Give Your Skills",
     subtitle: "Bold Wings in Hospitality"
   }

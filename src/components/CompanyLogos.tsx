@@ -11,7 +11,7 @@ const companies = [
   { name: 'Lufthansa', logo: 'logos\\Lufthansa_Logo_2018.svg' },
   { name: 'Planet Hollywood', logo: 'logos\\Planet_Hollywood_logo.svg' },
   { name: 'Taj Hotel', logo: 'logos\\Taj_Hotels_logo.svg' },
-  // { name: 'Akasha Air', logo: 'logos\\Akasa.svg' },
+  { name: 'Akasha Air', logo: 'logos\\Akasa.svg' },
   // { name: 'Celebi', logo: 'logos\\celebi.png' },
   // { name: 'Digiyatra', logo: 'logos\\digiyatra.png' },
 ];

@@ -13,15 +13,15 @@ const useInfiniteScroll = (containerWidth: number = 0, speed: number = 1) => {
     let startTime = Date.now();
 
     const animate = () => {
-      if (!isHovered.current) {
+      if (!isHovered.current && containerWidth > 0) {
         const currentTime = Date.now();
         const deltaTime = currentTime - startTime;
         startTime = currentTime;
 
         scrollX.set((prev) => {
           const next = prev - speed * (deltaTime / 16);
-          // Reset position when scrolled one container width
-          return next <= -containerWidth ? 0 : next;
+          // Reset position when scrolled one container width to create seamless loop
+          return next <= -containerWidth / 3 ? 0 : next;
         });
       }
       timeoutId = setTimeout(animate, 16);

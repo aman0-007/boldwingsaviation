@@ -10,14 +10,14 @@ const slides = [
     highlightWords: []
   },
   {
-    image: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957",
+    image: "/hero2.jpg",
     title: ["Give Your", "Future"],
     subtitle: "Bold Wings in Aviation",
     colors: ["text-white", "text-[#FFD700]"],
     highlightWords: ["Bold", "Aviation"]
   },
   {
-    image: "https://images.unsplash.com/photo-1566073771259-6a8506099945",
+    image: "/hero3.jpg",
     title: ["Give Your", "Skills"],
     subtitle: "Bold Wings in Hospitality",
     colors: ["text-white", "text-[#FFD700]"],

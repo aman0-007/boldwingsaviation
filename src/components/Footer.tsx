@@ -31,15 +31,15 @@ const Footer = () => {
               <div className="flex items-center">
                 <Phone className="h-5 w-5 mr-2" />
                 <a href="tel:+1234567890" className="text-gray-400 hover:text-[#f9df54]">
-                  +1 (234) 567-890
+                +91 8655620541
                 </a>
               </div>
-              <div className="flex items-center">
+              {/* <div className="flex items-center">
                 <MapPin className="h-5 w-5 mr-2" />
                 <span className="text-gray-400">
                   123 Aviation Street, City, Country
                 </span>
-              </div>
+              </div> */}
             </div>
           </div>
           
@@ -49,7 +49,7 @@ const Footer = () => {
               <a href="#" className="text-gray-400 hover:text-[#f9df54]">
                 <Facebook className="h-6 w-6" />
               </a>
-              <a href="#" className="text-gray-400 hover:text-[#f9df54]">
+              <a href="https://www.instagram.com/boldwingsofficial" target='blank' className="text-gray-400 hover:text-[#f9df54]">
                 <Instagram className="h-6 w-6" />
               </a>
               <a href="#" className="text-gray-400 hover:text-[#f9df54]">
