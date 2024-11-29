@@ -19,6 +19,28 @@ const Courses = () => {
     setIsModalOpen(false);
   };
 
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.1
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  };
+
   if (isLoading) {
     return (
       <div className="pt-20 min-h-screen flex items-center justify-center">
@@ -28,24 +50,28 @@ const Courses = () => {
   }
 
   return (
-    <div className="pt-20">
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="pt-20"
+    >
       <div className="container mx-auto px-4 py-12">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          variants={itemVariants}
           className="text-4xl font-bold text-center mb-12"
         >
           Our Courses
         </motion.h1>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {courses.map((course, index) => (
+        <motion.div 
+          variants={containerVariants}
+          className="grid md:grid-cols-2 lg:grid-cols-3 gap-8"
+        >
+          {courses.map((course) => (
             <motion.div
               key={course._id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              variants={itemVariants}
               className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all group"
             >
               <div className="relative overflow-hidden">
@@ -69,7 +95,7 @@ const Courses = () => {
               </div>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </div>
 
       {selectedCourse && (
@@ -79,7 +105,7 @@ const Courses = () => {
           course={selectedCourse}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

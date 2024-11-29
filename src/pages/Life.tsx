@@ -35,13 +35,38 @@ const lifeContent = [
 ];
 
 const Life = () => {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  };
+
   return (
-    <div className="pt-20">
+    <motion.div 
+      initial="hidden"
+      animate="visible"
+      variants={containerVariants}
+      className="pt-20"
+    >
       <div className="container mx-auto px-4 py-12">
         <motion.h1
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
+          variants={itemVariants}
           className="text-5xl font-bold text-center mb-12 gradient-text"
         >
           Life at BoldWings
@@ -51,9 +76,7 @@ const Life = () => {
           {lifeContent.map((item, index) => (
             <motion.div
               key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.4, delay: index * 0.1 }}
+              variants={itemVariants}
               className="max-w-4xl mx-auto"
             >
               {item.type === 'image' && (
@@ -91,7 +114,7 @@ const Life = () => {
           ))}
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
