@@ -50,7 +50,7 @@ const Team = () => {
           Our Team
         </motion.h1>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-14">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-12">
           {teamMembers.map((member, index) => (
             <motion.div
               key={member._id}
@@ -60,11 +60,11 @@ const Team = () => {
               className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-shadow"
             >
               <div className="aspect-w-1 aspect-h-1 relative overflow-hidden">
-                <img
+                <center><img
                   src={member.isLocal ? `http://localhost:3000${member.image}` : member.image}
                   alt={member.name}
-                  className="w-full h-64 object-cover object-center"
-                />
+                  className="w-64 h-64 object-cover object-center"
+                /></center>
               </div>
               <div className="p-6">
                 <h3 className="text-xl font-semibold mb-2">{member.name}</h3>

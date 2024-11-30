@@ -46,9 +46,9 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-400 hover:text-[#f9df54]">
+              {/* <a href="#" className="text-gray-400 hover:text-[#f9df54]">
                 <Facebook className="h-6 w-6" />
-              </a>
+              </a> */}
               <a href="https://www.instagram.com/boldwingsofficial" target='blank' className="text-gray-400 hover:text-[#f9df54]">
                 <Instagram className="h-6 w-6" />
               </a>

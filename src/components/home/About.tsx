@@ -13,7 +13,7 @@ const About = () => {
             className="md:w-1/2"
           >
             <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d"
+              src="aboutus.jpg"
               alt="About BoldWings"
               className="rounded-lg shadow-lg w-full"
             />

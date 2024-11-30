@@ -5,7 +5,7 @@ const slides = [
   {
     image: "/logo.png",
     title: ["Bold", "Wings"],
-    subtitle: "Where Dreams Come True",
+    subtitle: "Where Dreams and Reality Links",
     colors: ["text-[#FFD700]", "text-[#C0C0C0]"],
     highlightWords: []
   },

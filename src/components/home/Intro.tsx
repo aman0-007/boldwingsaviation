@@ -13,7 +13,9 @@ const Intro = () => {
             className="md:w-1/2"
           >
             <h2 className="text-4xl font-bold mb-6 text-gray-800">
-              Bold Wings Institute
+              Bold Wings - <br/>
+              <span className="text-3xl md:text-xl font-medium">Institute of Aviation and Hospitality</span>
+
             </h2>
             <p className="text-gray-600 mb-6 text-lg leading-relaxed">
               Welcome to Bold Wings Institute, where we transform aspirations into achievements. As a premier institution specializing in aviation and hospitality education, we provide comprehensive training programs designed to launch successful careers in these dynamic industries.

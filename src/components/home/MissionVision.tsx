@@ -13,9 +13,9 @@ const MissionVision = () => {
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4"
+              src="mission.jpg"
               alt="Our Mission"
-              className="w-full h-64 object-cover"
+              className="w-64 h-64 object-cover"
             />
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Mission</h3>
@@ -31,9 +31,9 @@ const MissionVision = () => {
             className="bg-white rounded-lg shadow-lg overflow-hidden"
           >
             <img
-              src="https://images.unsplash.com/photo-1517960413843-0aee8e2b3285"
+              src="vision2.jpg"
               alt="Our Vision"
-              className="w-full h-64 object-cover"
+              className="w-64 h-64 object-cover"
             />
             <div className="p-6">
               <h3 className="text-2xl font-bold mb-4 text-gray-800">Our Vision</h3>

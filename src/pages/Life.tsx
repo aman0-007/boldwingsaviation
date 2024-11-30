@@ -14,7 +14,7 @@ const lifeContent = [
   },
   {
     type: 'video',
-    content: 'https://player.vimeo.com/video/517031489?background=1&autoplay=1&loop=1&byline=0&title=0',
+    content: 'https://youtu.be/ANjsz-SthJQ',  // Corrected YouTube URL (no '?si=...')
     caption: 'A Day in the Life at BoldWings',
   },
   {
@@ -55,6 +55,15 @@ const Life = () => {
         ease: "easeOut"
       }
     }
+  };
+
+  // Function to extract YouTube video ID and format the embed URL
+  const getEmbedUrl = (url) => {
+    const match = url.match(/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|\S+\/|(?:\S+\?v=))|youtu\.be\/)([a-zA-Z0-9_-]+)/);
+    if (match && match[1]) {
+      return `https://www.youtube.com/embed/${match[1]}?autoplay=1`;
+    }
+    return ''; // Return an empty string if the URL is not valid
   };
 
   return (
@@ -102,7 +111,7 @@ const Life = () => {
               {item.type === 'video' && (
                 <div className="rounded-lg overflow-hidden shadow-xl aspect-video">
                   <iframe
-                    src={item.content}
+                    src={getEmbedUrl(item.content)}  // Use the embed URL function here
                     className="w-full h-full"
                     frameBorder="0"
                     allow="autoplay; fullscreen; picture-in-picture"
